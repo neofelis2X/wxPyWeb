@@ -1,0 +1,17 @@
+name: Test preview
+on:
+  workflow_dispatch:
+
+jobs:
+  publish-website:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v6
+        with:
+          ref: theme_update
+
+      - name: Build website
+        uses: ./.github/actions/build-website
+        if: github.event.action != 'closed'
